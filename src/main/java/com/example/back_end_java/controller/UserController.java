@@ -1,10 +1,9 @@
 package com.example.back_end_java.controller;
 
+import com.example.back_end_java.entity.LoginRequest;
 import com.example.back_end_java.entity.User;
+import com.example.back_end_java.entity.UserLogin;
 import com.example.back_end_java.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +20,10 @@ public class UserController {
     @PostMapping("/api/create")
     public User save(@RequestBody  User user){
         return userService.creationUser(user);
+    }
+
+    @PostMapping("/api/login")
+    public UserLogin login(@RequestBody LoginRequest loginRequest){
+        return userService.loginUser(loginRequest);
     }
 }
