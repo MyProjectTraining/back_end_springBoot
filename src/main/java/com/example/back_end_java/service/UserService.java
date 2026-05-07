@@ -72,4 +72,18 @@ public class UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
+    public User editUser(Long id , User user){
+        User getUserById = userRepository.getReferenceById(id);
+        String hashPass = passwordEncoder.encode(user.getPassword());
+        getUserById.setId(id);
+        getUserById.setName(user.getName());
+        getUserById.setEmail(user.getEmail());
+        getUserById.setPassword(hashPass);
+        return userRepository.save(getUserById);
+    }
+
+    public void  deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
 }
