@@ -1,5 +1,7 @@
 package com.example.back_end_java.config;
 
+import com.example.back_end_java.components.JWTFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,25 +10,29 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+    private final JWTFilter jwtFilter;
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws RuntimeException{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                 auth->auth
-                        .requestMatchers("/api/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/login" , "/api/register").permitAll()
+                        .requestMatchers("/api/auth/**").authenticated()
+                ).addFilterBefore(jwtFilter , UsernamePasswordAuthenticationFilter.class);
 
-        );
         return httpSecurity.build();
     }
 }

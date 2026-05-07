@@ -1,6 +1,5 @@
 package com.example.back_end_java.service;
 
-import com.example.back_end_java.config.JWTAuth;
 import com.example.back_end_java.entity.LoginRequest;
 import com.example.back_end_java.entity.User;
 import com.example.back_end_java.entity.UserLogin;
@@ -10,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.logging.Logger;
+import java.net.http.HttpClient;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -67,5 +67,9 @@ public class UserService {
         } catch(Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

@@ -4,11 +4,13 @@ import com.example.back_end_java.entity.LoginRequest;
 import com.example.back_end_java.entity.User;
 import com.example.back_end_java.entity.UserLogin;
 import com.example.back_end_java.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
+import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService ;
@@ -17,13 +19,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/create")
+    @PostMapping("/register")
     public User save(@RequestBody  User user){
         return userService.creationUser(user);
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/login")
     public UserLogin login(@RequestBody LoginRequest loginRequest){
         return userService.loginUser(loginRequest);
+    }
+
+    @GetMapping("/auth/users")
+    public List<User> getAllUser(){
+        return userService.getAll();
     }
 }
