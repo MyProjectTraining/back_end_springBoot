@@ -43,4 +43,9 @@ public class UserController {
     public void delete(@PathVariable Long id){
         userService.deleteUser(id);
     }
+
+    @GetMapping("/auth/list")
+    public List<User> userList(){
+        return userService.get();
+    }
 }
