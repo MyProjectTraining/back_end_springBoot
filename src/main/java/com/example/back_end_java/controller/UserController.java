@@ -1,12 +1,11 @@
 package com.example.back_end_java.controller;
 
-import com.example.back_end_java.entity.LoginRequest;
-import com.example.back_end_java.entity.User;
+import com.example.back_end_java.entity.user.LoginRequest;
+import com.example.back_end_java.entity.user.User;
 import com.example.back_end_java.entity.UserLogin;
 import com.example.back_end_java.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 
 @RestController

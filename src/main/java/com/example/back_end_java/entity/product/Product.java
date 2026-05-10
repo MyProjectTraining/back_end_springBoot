@@ -1,5 +1,6 @@
-package com.example.back_end_java.entity;
+package com.example.back_end_java.entity.product;
 
+import com.example.back_end_java.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

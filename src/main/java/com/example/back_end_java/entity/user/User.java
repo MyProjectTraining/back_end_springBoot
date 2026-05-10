@@ -1,9 +1,9 @@
-package com.example.back_end_java.entity;
+package com.example.back_end_java.entity.user;
 
 
+import com.example.back_end_java.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Generated;
 
 import java.util.List;
 

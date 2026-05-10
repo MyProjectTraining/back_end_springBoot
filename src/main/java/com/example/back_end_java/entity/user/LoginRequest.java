@@ -1,4 +1,4 @@
-package com.example.back_end_java.entity;
+package com.example.back_end_java.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
