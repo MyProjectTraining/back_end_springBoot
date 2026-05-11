@@ -1,5 +1,7 @@
 package com.example.back_end_java.components;
 
+import com.example.back_end_java.entity.Image;
+import com.example.back_end_java.entity.product.ImageResponse;
 import com.example.back_end_java.entity.product.Product;
 import com.example.back_end_java.entity.product.ProductResponse;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,14 @@ public class ProductDTO {
             productResponse.setEmail(product.getUser().getEmail());
             productResponse.setUsername(product.getUser().getName());
         }
+        if (product.getImage() != null){
+            ImageResponse imageResponse = new ImageResponse();
+            imageResponse.setId(product.getImage().getId());
+            imageResponse.setFilename(product.getImage().getFilename());
+            imageResponse.setUrl(product.getImage().getUrl());
+            productResponse.setImage(imageResponse);
+        }
+
         return productResponse;
     }
 }
