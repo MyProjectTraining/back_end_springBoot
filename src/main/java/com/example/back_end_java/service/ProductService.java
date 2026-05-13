@@ -46,10 +46,9 @@ public class ProductService {
         product.setPrice(productRequest.getPrice());
         product.setUser(user);
         Product saveProduct = productRepository.save(product);
-        String url = imageService.saveImage(file);
+        String nameImage = imageService.saveImage(file);
 
-        image.setFilename(file.getOriginalFilename());
-        image.setUrl(url);
+        image.setFilename(nameImage);
         image.setProduct(saveProduct);
         Image saveImage = imageRepository.save(image);
         saveProduct.setImage(saveImage);

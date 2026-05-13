@@ -27,7 +27,6 @@ public class JWTFilter extends OncePerRequestFilter {
             String token = header.substring(7);
             try {
 
-
                 String email = jwtAuth.authentification(token);
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(

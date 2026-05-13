@@ -16,7 +16,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id ;
     private String filename;
-    private String url;
     @OneToOne
     @JoinColumn(name = "img_id")
     private Product product;

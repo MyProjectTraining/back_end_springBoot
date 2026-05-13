@@ -43,8 +43,4 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping("/auth/list")
-    public List<User> userList(){
-        return userService.get();
-    }
 }

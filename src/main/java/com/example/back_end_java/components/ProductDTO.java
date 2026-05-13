@@ -22,7 +22,6 @@ public class ProductDTO {
             ImageResponse imageResponse = new ImageResponse();
             imageResponse.setId(product.getImage().getId());
             imageResponse.setFilename(product.getImage().getFilename());
-            imageResponse.setUrl(product.getImage().getUrl());
             productResponse.setImage(imageResponse);
         }
 
