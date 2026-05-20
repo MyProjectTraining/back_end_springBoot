@@ -27,7 +27,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User creationUser(User user) throws RuntimeException{
+    public UserLogin creationUser(User user) throws RuntimeException{
           String email = user.getEmail();
 
           User existedEmail = userRepository.findByEmailAndRole(email , admin);
@@ -37,8 +37,15 @@ public class UserService {
              String hasPassword = passwordEncoder.encode(user.getPassword());
              user.setPassword(hasPassword);
              user.setRole(admin);
-
-            return  userRepository.save(user);
+             userRepository.save(user);
+             String token = jwtAuth.generateToken(email);
+             if (token == null){
+                 throw new RuntimeException("token invalid");
+             }
+             UserLogin userLogin = new UserLogin();
+             userLogin.setEmail(email);
+             userLogin.setToken(token);
+             return userLogin;
     }
 
     public UserLogin loginUser(LoginRequest loginRequest) {

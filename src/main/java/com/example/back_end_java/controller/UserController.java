@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User save(@RequestBody  User user){
+    public UserLogin save(@RequestBody  User user){
         return userService.creationUser(user);
     }
 
