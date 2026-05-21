@@ -19,9 +19,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/productWithImg/user/{id}")
+    @PostMapping("/productWithImg/user/{email}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse addProduct(@PathVariable Long id ,
+    public ProductResponse addProduct(@PathVariable String email ,
                                       @RequestParam("name") String name,
                                       @RequestParam("price") int price,
                                       @RequestParam("quantity") int quantity,
@@ -31,7 +31,7 @@ public class ProductController {
         productRequest.setName(name);
         productRequest.setPrice(price);
         productRequest.setQuantity(quantity);
-        return productService.createProductUser(id , productRequest , file);
+        return productService.createProductUser(email , productRequest , file);
     }
 
 }

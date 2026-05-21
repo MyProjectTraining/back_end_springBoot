@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User , Long> {
+    User getByEmail(String email);
     User findByEmailAndRole(String email , String role);
     @Query("SELECT u from User u join fetch u.products p")
     List<User> getALlUserAndProduct();

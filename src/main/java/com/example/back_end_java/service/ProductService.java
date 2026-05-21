@@ -32,9 +32,9 @@ public class ProductService {
         this.imageService = imageService;
     }
 
-    public ProductResponse createProductUser(Long id , ProductRequest productRequest , MultipartFile file) throws IOException {
+    public ProductResponse createProductUser(String email , ProductRequest productRequest , MultipartFile file) throws IOException {
         Image image = new Image();
-        User user = userRepository.getReferenceById(id);
+        User user = userRepository.getByEmail(email);
         Product productExisting = productRepository.getByName(productRequest.getName());
         if (productExisting != null){
             productExisting.setQuantity(productRequest.getQuantity() + productExisting.getQuantity());
