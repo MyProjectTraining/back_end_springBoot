@@ -34,4 +34,9 @@ public class ProductController {
         return productService.createProductUser(email , productRequest , file);
     }
 
+    @DeleteMapping("/productWithImg/user/{email}/{productName}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponse deleteProduct(@PathVariable String email , @PathVariable String productName) throws IOException {
+        return productService.deleteProductUser(email , productName);
+    }
 }

@@ -32,11 +32,11 @@ public class ProductService {
         this.imageService = imageService;
     }
 
-    public ProductResponse createProductUser(String email , ProductRequest productRequest , MultipartFile file) throws IOException {
+    public ProductResponse createProductUser(String email, ProductRequest productRequest, MultipartFile file) throws IOException {
         Image image = new Image();
         User user = userRepository.getByEmail(email);
         Product productExisting = productRepository.getByName(productRequest.getName());
-        if (productExisting != null){
+        if (productExisting != null) {
             productExisting.setQuantity(productRequest.getQuantity() + productExisting.getQuantity());
             return productDTO.DTO(productRepository.save(productExisting));
         }
@@ -54,5 +54,22 @@ public class ProductService {
         saveProduct.setImage(saveImage);
 
         return productDTO.DTO(saveProduct);
+    }
+
+    public ProductResponse deleteProductUser(String email, String nameProduct) throws IOException {
+        User user = userRepository.getByEmail(email);
+        if (user == null){
+            throw new Error("user not found ");
+        }
+        Product productExisting = productRepository.getByName(nameProduct);
+        if (productExisting.getQuantity() > 1){
+            productExisting.setQuantity(productExisting.getQuantity() - 1);
+            return productDTO.DTO(productRepository.save(productExisting));
+        }
+
+        String imageProduct =  productExisting.getImage().getFilename();
+        imageService.deleteImage(imageProduct);
+        productRepository.delete(productExisting);
+        return null;
     }
 }

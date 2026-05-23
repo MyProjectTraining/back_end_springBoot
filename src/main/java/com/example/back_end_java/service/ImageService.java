@@ -38,4 +38,9 @@ public class ImageService {
         Files.copy(file.getInputStream() , filePath , StandardCopyOption.REPLACE_EXISTING);
         return  filename;
     }
+
+    public void deleteImage(String filename) throws IOException {
+        Path path = Paths.get(uploadsDir + filename);
+        Files.delete(path);
+    }
 }
