@@ -1,7 +1,6 @@
 package com.example.back_end_java.components;
 
-import com.example.back_end_java.entity.Image;
-import com.example.back_end_java.entity.product.ImageResponse;
+import com.example.back_end_java.entity.image.ImageResponse;
 import com.example.back_end_java.entity.product.Product;
 import com.example.back_end_java.entity.product.ProductResponse;
 import org.springframework.stereotype.Component;

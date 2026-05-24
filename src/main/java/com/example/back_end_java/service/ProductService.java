@@ -1,7 +1,7 @@
 package com.example.back_end_java.service;
 
 import com.example.back_end_java.components.ProductDTO;
-import com.example.back_end_java.entity.Image;
+import com.example.back_end_java.entity.image.Image;
 import com.example.back_end_java.entity.product.Product;
 import com.example.back_end_java.entity.product.ProductRequest;
 import com.example.back_end_java.entity.product.ProductResponse;

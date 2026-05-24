@@ -1,4 +1,4 @@
-package com.example.back_end_java.entity;
+package com.example.back_end_java.entity.image;
 
 import com.example.back_end_java.entity.product.Product;
 import jakarta.persistence.*;

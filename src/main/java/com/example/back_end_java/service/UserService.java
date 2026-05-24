@@ -2,7 +2,7 @@ package com.example.back_end_java.service;
 
 import com.example.back_end_java.entity.user.LoginRequest;
 import com.example.back_end_java.entity.user.User;
-import com.example.back_end_java.entity.UserLogin;
+import com.example.back_end_java.entity.user.UserLogin;
 import com.example.back_end_java.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

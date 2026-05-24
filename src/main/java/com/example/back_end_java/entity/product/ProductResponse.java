@@ -1,5 +1,6 @@
 package com.example.back_end_java.entity.product;
 
+import com.example.back_end_java.entity.image.ImageResponse;
 import lombok.*;
 
 @Getter

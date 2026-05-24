@@ -1,7 +1,5 @@
 package com.example.back_end_java.service;
 
-import com.example.back_end_java.entity.Image;
-import com.example.back_end_java.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

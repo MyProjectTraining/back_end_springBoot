@@ -1,6 +1,6 @@
 package com.example.back_end_java.entity.product;
 
-import com.example.back_end_java.entity.Image;
+import com.example.back_end_java.entity.image.Image;
 import com.example.back_end_java.entity.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

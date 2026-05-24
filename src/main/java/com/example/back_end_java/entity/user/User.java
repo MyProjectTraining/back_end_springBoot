@@ -1,6 +1,7 @@
 package com.example.back_end_java.entity.user;
 
 
+import com.example.back_end_java.entity.account.Account;
 import com.example.back_end_java.entity.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,4 +27,6 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Product> products;
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Account> accounts;
 }

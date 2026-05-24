@@ -1,4 +1,4 @@
-package com.example.back_end_java.entity.product;
+package com.example.back_end_java.entity.image;
 
 import lombok.*;
 
