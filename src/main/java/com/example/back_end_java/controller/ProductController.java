@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -34,6 +35,18 @@ public class ProductController {
         productRequest.setPrice(price);
         productRequest.setQuantity(quantity);
         return productService.createProductUser(email , accountType, productRequest , file);
+    }
+
+    @GetMapping("/productWithImg")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<ProductResponse> getAllProduct(){
+        return productService.getAllProduct();
+    }
+
+    @GetMapping("/productWithImg/{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<ProductResponse> getAllProductByEmail(@PathVariable String email){
+        return productService.getAllProductByEmail(email);
     }
 
     @DeleteMapping("/productWithImg/user/{email}/{productName}")

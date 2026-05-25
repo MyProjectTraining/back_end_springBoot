@@ -4,6 +4,7 @@ import com.example.back_end_java.components.AccountDTO;
 import com.example.back_end_java.entity.account.Account;
 import com.example.back_end_java.entity.account.AccountRequest;
 import com.example.back_end_java.entity.account.AccountResponse;
+import com.example.back_end_java.entity.account.Type.AccountType;
 import com.example.back_end_java.entity.user.User;
 import com.example.back_end_java.repository.AccountRepository;
 import com.example.back_end_java.repository.UserRepository;
@@ -51,5 +52,9 @@ public class AccountService {
         }
 
         return accountResponseList;
+    }
+
+    public AccountResponse getAccountByUserAndUser(String email , AccountType accountType){
+        return accountDTO.DTO(accountRepository.getAccountByEmailAndAccountType(email  ,accountType));
     }
 }

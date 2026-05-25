@@ -93,7 +93,5 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public List<User> get(){
-        return userRepository.getALlUserAndProduct();
-    }
+
 }

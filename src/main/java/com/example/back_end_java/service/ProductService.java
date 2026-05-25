@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -78,6 +80,29 @@ public class ProductService {
         return productDTO.DTO(saveProduct);
     }
 
+    public List<ProductResponse> getAllProduct(){
+        List<Product> productLists = productRepository.findAll();
+        List<ProductResponse> responses = new ArrayList<>();
+        for (Product product : productLists){
+            responses.add(productDTO.DTO(product));
+        }
+
+        return responses;
+    }
+
+    public List<ProductResponse> getAllProductByEmail(String email){
+        List<ProductResponse> productResponses = new ArrayList<>();
+        User user = userRepository.getByEmail(email);
+        if (user == null){
+            throw new Error("no product found for email" + email);
+        }
+        List<Product> responses = user.getProducts();
+        for (Product product: responses){
+            productResponses.add(productDTO.DTO(product));
+        }
+        return productResponses;
+    }
+
     public ProductResponse deleteProductUser(String email, String nameProduct) throws IOException {
         User user = userRepository.getByEmail(email);
         if (user == null){
@@ -94,4 +119,6 @@ public class ProductService {
         productRepository.delete(productExisting);
         return null;
     }
+
+
 }

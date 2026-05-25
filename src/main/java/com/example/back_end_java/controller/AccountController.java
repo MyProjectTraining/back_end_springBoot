@@ -2,6 +2,7 @@ package com.example.back_end_java.controller;
 
 import com.example.back_end_java.entity.account.AccountRequest;
 import com.example.back_end_java.entity.account.AccountResponse;
+import com.example.back_end_java.entity.account.Type.AccountType;
 import com.example.back_end_java.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +29,11 @@ public class AccountController {
     public List<AccountResponse> getAccountUser(@PathVariable String email){
         return accountService.getAll(email);
     }
+
+    @GetMapping("/{accountType}/user/{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public AccountResponse getOneAccount(@PathVariable String email , @PathVariable AccountType accountType){
+        return accountService.getAccountByUserAndUser(email , accountType);
+    }
+
 }
