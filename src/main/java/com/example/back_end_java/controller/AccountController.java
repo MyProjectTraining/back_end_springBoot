@@ -6,6 +6,8 @@ import com.example.back_end_java.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth/account")
 public class AccountController {
@@ -23,7 +25,7 @@ public class AccountController {
 
     @GetMapping("/user/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public AccountResponse getAccountUser(@PathVariable String email){
+    public List<AccountResponse> getAccountUser(@PathVariable String email){
         return accountService.getAll(email);
     }
 }

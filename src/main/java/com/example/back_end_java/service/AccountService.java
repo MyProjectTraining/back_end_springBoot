@@ -9,6 +9,7 @@ import com.example.back_end_java.repository.AccountRepository;
 import com.example.back_end_java.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,16 +39,17 @@ public class AccountService {
         return accountDTO.DTO(saveAccount);
     }
 
-    public AccountResponse getAll(String email){
+    public List<AccountResponse> getAll(String email){
+        List<AccountResponse> accountResponseList = new ArrayList<>();
         User user = userRepository.getByEmail(email);
         if (user == null){
             throw new Error("no uer found" + user);
         }
-        List<Account> accountOfEmails = accountRepository.findAll();
+        List<Account> accountOfEmails = user.getAccounts();
         for (Account account : accountOfEmails) {
-           return accountDTO.DTO(account);
+           accountResponseList.add(accountDTO.DTO(account));
         }
 
-        return null;
+        return accountResponseList;
     }
 }

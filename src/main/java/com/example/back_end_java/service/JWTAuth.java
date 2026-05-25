@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class JWTAuth {
 
-    private Key signInKey;
+    private final Key signInKey;
 
     public JWTAuth(@Value("${KEY_TOKEN}") String keyToken) {
         if (keyToken == null || keyToken.isBlank()){
@@ -27,7 +27,7 @@ public class JWTAuth {
     }
 
 
-    private final long exp = 1000 * 60 * 60 ;
+    public final long exp = 1000 * 60 * 60 ;
 
     public String generateToken(String email){
 

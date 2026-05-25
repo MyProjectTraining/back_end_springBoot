@@ -43,7 +43,7 @@ public class ProductService {
 
         Image image = new Image();
         Account account = accountRepository.getAccountByEmailAndAccountType(email,accountType);
-        User user = userRepository.getByEmail(email);
+        User user = account.getUser();
         Product productExisting = productRepository.getByName(productRequest.getName());
         if (productExisting != null) {
             productExisting.setPrice(productRequest.getPrice());
