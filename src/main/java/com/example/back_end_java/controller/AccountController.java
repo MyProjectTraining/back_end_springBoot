@@ -20,4 +20,10 @@ public class AccountController {
     public AccountResponse saveUser(@PathVariable String email,@RequestBody AccountRequest accountRequest){
         return accountService.creationAccount(accountRequest , email);
     }
+
+    @GetMapping("/user/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public AccountResponse getAccountUser(@PathVariable String email){
+        return accountService.getAll(email);
+    }
 }

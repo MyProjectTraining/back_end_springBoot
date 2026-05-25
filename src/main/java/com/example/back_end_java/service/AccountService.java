@@ -9,6 +9,8 @@ import com.example.back_end_java.repository.AccountRepository;
 import com.example.back_end_java.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
     private final AccountDTO accountDTO;
@@ -34,5 +36,18 @@ public class AccountService {
         account.setUser(userExisting);
         Account saveAccount = accountRepository.save(account);
         return accountDTO.DTO(saveAccount);
+    }
+
+    public AccountResponse getAll(String email){
+        User user = userRepository.getByEmail(email);
+        if (user == null){
+            throw new Error("no uer found" + user);
+        }
+        List<Account> accountOfEmails = accountRepository.findAll();
+        for (Account account : accountOfEmails) {
+           return accountDTO.DTO(account);
+        }
+
+        return null;
     }
 }

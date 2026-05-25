@@ -64,8 +64,8 @@ public class ProductService {
         product.setPrice(productRequest.getPrice());
         product.setUser(user);
         int newLine = product.getPrice() * product.getQuantity();
-        int totale = account.getMoney() - newLine;
-        account.setMoney(totale);
+        int total = account.getMoney() - newLine;
+        account.setMoney(total);
         accountRepository.save(account);
         Product saveProduct = productRepository.save(product);
         String nameImage = imageService.saveImage(file);
