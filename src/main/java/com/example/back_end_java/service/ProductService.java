@@ -120,5 +120,26 @@ public class ProductService {
         return null;
     }
 
-
+    public ProductResponse updateProduct(String email , Long id , AccountType accountType , ProductRequest productRequest , MultipartFile file) throws IOException {
+        Image image = new Image();
+        Account account = accountRepository.getAccountByEmailAndAccountType(email , accountType);
+        User user = account.getUser();
+        Image idImage = imageRepository.getProductsById(id);
+        Product product = idImage.getProduct();
+        product.setName(productRequest.getName());
+        product.setPrice(productRequest.getPrice());
+        product.setQuantity(productRequest.getQuantity());
+        product.setUser(user);
+        int newLine = product.getQuantity() * product.getPrice();
+        int total = account.getMoney() - newLine;
+        imageService.deleteImage(idImage.getFilename());
+        account.setMoney(total);
+        Product saveProduct = productRepository.save(product);
+        String imageProduct = imageService.saveImage(file);
+        image.setFilename(imageProduct);
+        image.setProduct(saveProduct);
+        Image imageSave = imageRepository.save(image);
+        product.setImage(imageSave);
+        return productDTO.DTO(product);
+    }
 }

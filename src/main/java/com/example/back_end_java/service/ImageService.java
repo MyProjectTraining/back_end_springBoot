@@ -41,4 +41,6 @@ public class ImageService {
         Path path = Paths.get(uploadsDir + filename);
         Files.delete(path);
     }
+
+
 }

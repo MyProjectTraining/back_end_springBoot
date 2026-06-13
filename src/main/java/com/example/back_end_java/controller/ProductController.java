@@ -54,4 +54,18 @@ public class ProductController {
     public ProductResponse deleteProduct(@PathVariable String email , @PathVariable String productName) throws IOException {
         return productService.deleteProductUser(email , productName);
     }
+
+    @PutMapping("/productWithImg/{id}/user/{email}/{productName}/accountType/{accountType}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponse updateProduct(@PathVariable String email ,@PathVariable Long id , @PathVariable AccountType accountType,
+                                         @RequestParam("name") String name,
+                                         @RequestParam("price") int price ,
+                                         @RequestParam("quantity") int quantity,
+                                         @RequestParam("image") MultipartFile file) throws IOException {
+        ProductRequest productRequest = new ProductRequest();
+        productRequest.setName(name);
+        productRequest.setQuantity(quantity);
+        productRequest.setPrice(price);
+        return productService.updateProduct(email,id,accountType,productRequest,file);
+    }
 }
