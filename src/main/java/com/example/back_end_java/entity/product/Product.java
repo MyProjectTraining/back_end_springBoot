@@ -1,5 +1,6 @@
 package com.example.back_end_java.entity.product;
 
+import com.example.back_end_java.entity.Type.Devise;
 import com.example.back_end_java.entity.image.Image;
 import com.example.back_end_java.entity.user.User;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class Product {
     private int quantity;
     @Min(value = 1, message = "Price must be greater than 0")
     private int price;
+    private Devise devise;
     @OneToOne(mappedBy = "product" , cascade = CascadeType.ALL)
     private Image image;
 }

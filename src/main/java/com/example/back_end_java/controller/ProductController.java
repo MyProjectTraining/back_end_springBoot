@@ -1,7 +1,7 @@
 package com.example.back_end_java.controller;
 
-import com.example.back_end_java.entity.account.Type.AccountType;
-import com.example.back_end_java.entity.product.Product;
+import com.example.back_end_java.entity.Type.AccountType;
+import com.example.back_end_java.entity.Type.Devise;
 import com.example.back_end_java.entity.product.ProductRequest;
 import com.example.back_end_java.entity.product.ProductResponse;
 import com.example.back_end_java.service.ProductService;
@@ -61,11 +61,13 @@ public class ProductController {
                                          @RequestParam("name") String name,
                                          @RequestParam("price") int price ,
                                          @RequestParam("quantity") int quantity,
+                                         @RequestParam("devise") Devise devise,
                                          @RequestParam("image") MultipartFile file) throws IOException {
         ProductRequest productRequest = new ProductRequest();
         productRequest.setName(name);
         productRequest.setQuantity(quantity);
         productRequest.setPrice(price);
+        productRequest.setDevise(devise);
         return productService.updateProduct(email,id,accountType,productRequest,file);
     }
 }

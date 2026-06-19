@@ -2,7 +2,7 @@ package com.example.back_end_java.service;
 
 import com.example.back_end_java.components.ProductDTO;
 import com.example.back_end_java.entity.account.Account;
-import com.example.back_end_java.entity.account.Type.AccountType;
+import com.example.back_end_java.entity.Type.AccountType;
 import com.example.back_end_java.entity.image.Image;
 import com.example.back_end_java.entity.product.Product;
 import com.example.back_end_java.entity.product.ProductRequest;
@@ -42,7 +42,6 @@ public class ProductService {
     }
 
     public ProductResponse createProductUser(String email, AccountType accountType, ProductRequest productRequest, MultipartFile file) throws IOException {
-
         Image image = new Image();
         Account account = accountRepository.getAccountByEmailAndAccountType(email,accountType);
         User user = account.getUser();
@@ -64,6 +63,7 @@ public class ProductService {
         product.setName(productRequest.getName());
         product.setQuantity(productRequest.getQuantity());
         product.setPrice(productRequest.getPrice());
+        product.setDevise(productRequest.getDevise());
         product.setUser(user);
         int newLine = product.getPrice() * product.getQuantity();
         int total = account.getMoney() - newLine;
@@ -142,4 +142,6 @@ public class ProductService {
         product.setImage(imageSave);
         return productDTO.DTO(product);
     }
+
+
 }

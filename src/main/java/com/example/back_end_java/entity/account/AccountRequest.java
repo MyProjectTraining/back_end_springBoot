@@ -1,7 +1,7 @@
 package com.example.back_end_java.entity.account;
 
-import com.example.back_end_java.entity.account.Type.AccountType;
-import com.example.back_end_java.entity.account.Type.Devise;
+import com.example.back_end_java.entity.Type.AccountType;
+import com.example.back_end_java.entity.Type.Devise;
 import lombok.*;
 
 @Getter

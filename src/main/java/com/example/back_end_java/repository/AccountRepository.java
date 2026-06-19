@@ -1,7 +1,7 @@
 package com.example.back_end_java.repository;
 
 import com.example.back_end_java.entity.account.Account;
-import com.example.back_end_java.entity.account.Type.AccountType;
+import com.example.back_end_java.entity.Type.AccountType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

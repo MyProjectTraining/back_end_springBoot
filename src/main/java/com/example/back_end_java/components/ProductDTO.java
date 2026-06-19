@@ -13,6 +13,7 @@ public class ProductDTO {
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());
         productResponse.setQuantity(product.getQuantity());
+        productResponse.setDevise(product.getDevise());
         if(product.getUser() != null){
             productResponse.setEmail(product.getUser().getEmail());
             productResponse.setUsername(product.getUser().getName());
