@@ -28,12 +28,14 @@ public class ProductController {
                                       @RequestParam("name") String name,
                                       @RequestParam("price") int price,
                                       @RequestParam("quantity") int quantity,
+                                      @RequestParam("devise") Devise devise,
                                       @RequestParam("image") MultipartFile file) throws IOException {
 
         ProductRequest productRequest = new ProductRequest();
         productRequest.setName(name);
         productRequest.setPrice(price);
         productRequest.setQuantity(quantity);
+        productRequest.setDevise(devise);
         return productService.createProductUser(email , accountType, productRequest , file);
     }
 

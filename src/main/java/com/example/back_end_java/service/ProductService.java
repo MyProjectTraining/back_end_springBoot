@@ -1,6 +1,7 @@
 package com.example.back_end_java.service;
 
 import com.example.back_end_java.components.ProductDTO;
+import com.example.back_end_java.entity.Type.Devise;
 import com.example.back_end_java.entity.account.Account;
 import com.example.back_end_java.entity.Type.AccountType;
 import com.example.back_end_java.entity.image.Image;
@@ -12,6 +13,7 @@ import com.example.back_end_java.repository.AccountRepository;
 import com.example.back_end_java.repository.ImageRepository;
 import com.example.back_end_java.repository.ProductRepository;
 import com.example.back_end_java.repository.UserRepository;
+import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,17 +49,27 @@ public class ProductService {
         User user = account.getUser();
         Product productExisting = productRepository.getByName(productRequest.getName());
         if (productExisting != null) {
-            productExisting.setPrice(productRequest.getPrice());
-            productExisting.setQuantity(productRequest.getQuantity() + productExisting.getQuantity());
-            int total = productExisting.getQuantity() * productExisting.getPrice();
-            int newline = account.getMoney() - total;
-            if (newline < 0){
-                System.out.print("no money , your account no money");
-                throw new Error("no money");
+            int cost = productRequest.getPrice() * productRequest.getQuantity();
+
+            int newBalance = conversion(account) - cost;
+
+            if (newBalance < 0) {
+                throw new IllegalArgumentException("No money in account");
             }
-            account.setMoney(newline);
+
+            account.setMoney(newBalance);
             accountRepository.save(account);
-            return productDTO.DTO(productRepository.save(productExisting));
+
+            productExisting.setQuantity(
+                    productExisting.getQuantity() + productRequest.getQuantity()
+            );
+
+            productExisting.setPrice(productRequest.getPrice());
+            productExisting.setDevise(productRequest.getDevise());
+
+            return productDTO.DTO(
+                    productRepository.save(productExisting)
+            );
         }
         Product product = new Product();
         product.setName(productRequest.getName());
@@ -66,7 +78,7 @@ public class ProductService {
         product.setDevise(productRequest.getDevise());
         product.setUser(user);
         int newLine = product.getPrice() * product.getQuantity();
-        int total = account.getMoney() - newLine;
+        int total = conversion(account) - newLine;
         account.setMoney(total);
         accountRepository.save(account);
         Product saveProduct = productRepository.save(product);
@@ -143,5 +155,18 @@ public class ProductService {
         return productDTO.DTO(product);
     }
 
+    private int conversion(Account account){
+        int totale = 0 ;
+        if (account.getDevise().equals(Devise.Euro)){
+            totale = account.getMoney();
+        }
+        if (account.getDevise().equals(Devise.Ar)){
+            totale = (account.getMoney()/5000);
+        }
+        if (account.getDevise().equals(Devise.Dollar)){
+            totale = account.getMoney();
+        }
+        return totale;
+    }
 
 }

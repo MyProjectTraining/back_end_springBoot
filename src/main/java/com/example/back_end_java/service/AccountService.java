@@ -17,10 +17,10 @@ import java.util.List;
 
 @Service
 public class AccountService {
-    @Value("${valeurDollar}")
-    private int valeurDollar;
-    @Value("${valeurEuro}")
-    private int valeurEuro;
+    @Value("${valourDollar}")
+    private int valourDollar;
+    @Value("${valourEuro}")
+    private int valourEuro;
     private final AccountDTO accountDTO;
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
@@ -73,10 +73,10 @@ public class AccountService {
     private int conversion(AccountRequest accountNew){
         int total = 0 ;
         if (accountNew.getDevise().equals(Devise.Dollar)){
-            total = (accountNew.getMoney() * valeurDollar);
+            total = (accountNew.getMoney() * valourDollar);
         }
         if (accountNew.getDevise().equals(Devise.Euro)){
-           total = accountNew.getMoney() * valeurEuro;
+           total = accountNew.getMoney() * valourEuro;
         }
         if (accountNew.getDevise().equals(Devise.Ar)){
             total = accountNew.getMoney();
